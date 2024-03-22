@@ -1,0 +1,43 @@
+// Slowest pages
+
+browserTimings
+| where notempty(totalDuration) and client_Type == 'Browser'
+| extend _sum = totalDuration
+| extend _count = itemCount
+| extend _sum = _sum * _count
+| extend _page1 = replace_regex(name, @'[a-zA-Z]{2}\d{5,}\.?\d{1}|\d{10,}', '<ip-right-number>')
+| extend _page2 = replace_regex(_page1, @'[a-zA-Z]{3}\/[a-zA-Z]{2}\d{2}\/\d{3}', '<spc-number>')
+| summarize ['Page load time (ms)'] = sum(_sum) / sum(_count) by ['Page'] = _page2, bin(timestamp, 1d)
+| order by timestamp desc
+
+
+
+browserTimings
+| where notempty(totalDuration) and client_Type == 'Browser'
+| extend _sum = totalDuration * itemCount, _count = itemCount
+| extend _page1 = replace_regex(name, @'[a-zA-Z]{2}\d{5,}\.?\d{1}|\d{10,}', '<ip-right-number>')
+| extend _page2 = replace_regex(_page1, @'[a-zA-Z]{3}\/[a-zA-Z]{2}\d{2}\/\d{3}', '<spc-number>')
+| summarize ['Page load time (ms)'] = sum(_sum) / sum(_count) by ['Page'] = _page2, bin(timestamp, 1d)
+| order by timestamp desc
+
+
+
+
+
+
+
+pageViews 
+| where customDimensions.serviceRequestId == 'SR12345' 
+| summarize count() by name
+
+//let serviceRequestId = "SR12345";
+let serviceRequestId = "SR67890";
+pageViews
+| extend url = replace("/Apply/SR[0-9]+/stepthree", "/Apply/{serviceRequestId}/stepthree", url)
+| summarize count() by name, serviceRequestId
+
+
+pageViews
+| extend serviceRequestId = extract("/Apply/(SR[0-9]+)/", 1, url)
+| where serviceRequestId != "" and url != "/"
+| summarize count() by serviceRequestId

@@ -4,7 +4,7 @@ import './App.css';
 import { AppInsightsContext } from '@microsoft/applicationinsights-react-js';
 import { withAITracking } from '@microsoft/applicationinsights-react-js';
 import { reactPlugin, appInsights } from './AppInsights';
-import CookieConsent, { Cookies} from "react-cookie-consent";
+import CookieConsent, { Cookies } from "react-cookie-consent";
 
 interface Forecast {
     date: string;
@@ -101,7 +101,7 @@ function App() {
                             button: 'Start Wizzard Button'
                         }
                     });
-                    navigate('/stepone')
+                    navigate('/Apply/SR12345/stepone')
                 }}>Start Here</button>
 
                 <br />

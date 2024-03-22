@@ -1,16 +1,17 @@
+import { Exception } from '@microsoft/applicationinsights-web';
 import { appInsights } from './AppInsights'
 
 const StepThree = () => {
 
-    document.title = "Step Three";  
+    document.title = "Step Three";
 
-    const handleButtonClick = () => {
+    const handleButtonClick = () => {        
         appInsights.trackEvent({
             name: 'Steps Complete', properties: {
                 button: 'Page Three Finish Button',
-                dimentions:'demo',
+                dimentions: 'demo',
                 trackingId: '1234',
-                transactionId: '5678',                
+                transactionId: '5678',
                 root: 'mypage',
                 subProperties: {
                     button: 'Page Three Finish Button',
@@ -20,7 +21,10 @@ const StepThree = () => {
                     yourName: 'dawid'
                 }
             }
+
         });
+
+        throw new Exception("This is a test exception", true);
     }
 
     return (

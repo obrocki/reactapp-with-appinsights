@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 const StepOne = () => {
 
     document.title = "Step One";
-    
+
     const navigate = useNavigate();
 
 
@@ -13,7 +13,7 @@ const StepOne = () => {
             <p>Step 1 of 3</p>
             <b />
 
-            <button onClick={() => navigate('/steptwo')}>Step Two</button>            
+            <button onClick={() => navigate('/Apply/SR12345/steptwo')}>Step Two</button>
         </div>
     );
 };

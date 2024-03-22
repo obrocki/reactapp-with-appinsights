@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 const StepTwo = () => {
 
     document.title = "Step Two";
-    
+
     const navigate = useNavigate();
     return (
         <div>
@@ -11,7 +11,7 @@ const StepTwo = () => {
             <p>Step 2 of 3.</p>
 
             <b />
-            <button onClick={() => navigate('/stepthree')}>Step Three</button>
+            <button onClick={() => navigate('/Apply/SR12345/stepthree')}>Step Three</button>
         </div>
     );
 };
